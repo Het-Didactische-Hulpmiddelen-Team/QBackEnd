@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Configuration
-public class QueueController extends AbstractWebSocketHandler {
+public class QController extends AbstractWebSocketHandler {
 
     private static final Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<>());
 
