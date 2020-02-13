@@ -5,8 +5,6 @@ import be.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @CrossOrigin
 @RestController
 public class QCRUDController {
@@ -18,20 +16,25 @@ public class QCRUDController {
     }
 
     @GetMapping("/room/all")
-    public List<Room> getRooms(){
+    public Object getRooms(){
         return service.getRooms();
     }
 
+    @GetMapping("/room/queue/{roomid}")
+    public Object getQueue(@PathVariable(value = "roomid") long roomid){
+        return service.getQueue(roomid);
+    }
+
     @GetMapping("room/join/{roomid}/{name}")
-    public Room joinRoom(@PathVariable(value = "name") String name,@PathVariable(value = "roomid") long roomid) {
+    public Object joinRoom(@PathVariable(value = "name") String name,@PathVariable(value = "roomid") long roomid) {
         service.joinRoom(name,roomid);
-        return service.getRoom(roomid);
+        return service.getQueue(roomid);
     }
 
     @GetMapping("room/leave/{roomid}/{name}")
-    public Room leaveRoom(@PathVariable(value = "name") String name,@PathVariable(value = "roomid") long roomid) {
+    public Object leaveRoom(@PathVariable(value = "name") String name,@PathVariable(value = "roomid") long roomid) {
         service.leaveRoom(name,roomid);
-        return service.getRoom(roomid);
+        return service.getQueue(roomid);
     }
 
     @GetMapping("room/delete/{roomid}")

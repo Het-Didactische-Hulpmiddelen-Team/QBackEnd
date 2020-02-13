@@ -1,5 +1,7 @@
 package be.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class Room {
         setVak(vak);
     }
 
+    @JsonIgnore
     public List<Long> getQueue() {
         return queue;
     }
@@ -62,12 +65,10 @@ public class Room {
     }
 
     public void addToQueue(Long id){
-        System.out.println("Adding " + id);
         queue.add(id);
     }
 
     public void deleteFromQueue(Long id){
-        System.out.println("Removing " + id);
         queue.remove(id);
     }
 

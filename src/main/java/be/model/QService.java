@@ -6,6 +6,7 @@ import be.db.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,5 +50,14 @@ public class QService {
 
     public void deleteRoom(long id){
         roomRepository.deleteById(id);
+    }
+
+    public List<String> getQueue(long roomid){
+        Room room = roomRepository.findById(roomid).get();
+        List<String> result = new ArrayList<>();
+        for (long id:room.getQueue()) {
+            result.add(userRepository.findById(id).get().getName());
+        }
+        return result;
     }
 }
