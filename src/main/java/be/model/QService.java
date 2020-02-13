@@ -42,4 +42,12 @@ public class QService {
     public Room getRoom(long roomid){
         return roomRepository.findById(roomid).get();
     }
+
+    public void createRoom(Room room){
+        roomRepository.save(room);
+    }
+
+    public void deleteRoom(long id){
+        roomRepository.deleteById(id);
+    }
 }

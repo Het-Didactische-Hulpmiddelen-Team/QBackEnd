@@ -34,5 +34,25 @@ public class QCRUDController {
         return service.getRoom(roomid);
     }
 
+    @GetMapping("room/delete/{roomid}")
+    public Object deleteRoom(@PathVariable(value = "roomid") long roomid){
+        try {
+            service.deleteRoom(roomid);
+            return getRooms();
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @GetMapping("room/create")
+    public Object createRoom(@RequestBody Room room){
+        try {
+            service.createRoom(room);
+            return getRooms();
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
 
 }
