@@ -57,5 +57,22 @@ public class QCRUDController {
         }
     }
 
+    @GetMapping("authenticate")
+    public boolean authenticate(String name,String password){
+        return service.authenticate(name,password);
+    }
+
+    @GetMapping("isAuthenticated")
+    public boolean isAuthenticated(String name){
+        return service.isAuthenticated(name);
+    }
+
+    @GetMapping("unAuthenticate")
+    public boolean unAuthenticate(String name){
+        return service.unAuthenticate(name);
+    }
+
+
+
 
 }

@@ -17,6 +17,8 @@ public class QService {
     @Autowired
     private UserRepository userRepository;
 
+    private boolean authenticated = false;
+
     public QService() {
 
     }
@@ -45,11 +47,15 @@ public class QService {
     }
 
     public void createRoom(Room room){
-        roomRepository.save(room);
+       if(authenticated){
+           roomRepository.save(room);
+       }
     }
 
     public void deleteRoom(long id){
-        roomRepository.deleteById(id);
+        if(authenticated){
+            roomRepository.deleteById(id);
+        }
     }
 
     public List<String> getQueue(long roomid){
@@ -59,5 +65,19 @@ public class QService {
             result.add(userRepository.findById(id).get().getName());
         }
         return result;
+    }
+
+    public boolean authenticate(String name, String password) {
+        authenticated = true;
+        return isAuthenticated(name);
+    }
+
+    public boolean isAuthenticated(String name) {
+        return authenticated;
+    }
+
+    public boolean unAuthenticate(String name) {
+        authenticated = false;
+        return isAuthenticated(name);
     }
 }
