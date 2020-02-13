@@ -47,13 +47,12 @@ public class QCRUDController {
         }
     }
 
-    @GetMapping("room/create")
-    public Object createRoom(@RequestBody Room room){
+    @PostMapping("room/create")
+    public void createRoom(@RequestBody Room room){
         try {
             service.createRoom(room);
-            return getRooms();
         } catch (Exception e) {
-            return e.getMessage();
+            System.out.println(e.getMessage());;
         }
     }
 
