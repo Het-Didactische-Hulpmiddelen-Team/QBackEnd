@@ -72,6 +72,14 @@ public class Room {
         queue.remove(id);
     }
 
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Room.class.getSimpleName() + "[", "]")
