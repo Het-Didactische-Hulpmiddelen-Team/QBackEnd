@@ -24,9 +24,3 @@ out/*
 src/main/resources/*
 
 lib/*
-
-build.gradle
-
-META-INF
-
-META-INF/MANIFEST.MF
