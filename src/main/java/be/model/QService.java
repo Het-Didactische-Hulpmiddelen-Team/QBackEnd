@@ -6,6 +6,9 @@ import be.db.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,9 @@ public class QService {
     private RoomRepository roomRepository;
     @Autowired
     private UserRepository userRepository;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     private boolean authenticated = false;
 
@@ -28,17 +34,18 @@ public class QService {
     }
 
     public void joinRoom(String name, long roomid) {
-        userRepository.save(new User(name));
         Room room = roomRepository.findById(roomid).get();
-        User user = userRepository.findByName(name);
-        room.addToQueue(user.getId());
-        roomRepository.save(room);
+        if(!getQueue(roomid).contains(name)){
+            userRepository.save(new User(name));
+            room.addToQueue(getIdByName(name));
+            roomRepository.save(room);
+        }
     }
 
     public void leaveRoom(String name, long roomid) {
         Room room = roomRepository.findById(roomid).get();
-        User user = userRepository.findByName(name);
-        room.deleteFromQueue(user.getId());
+        long id = getIdByName(name);
+        room.deleteFromQueue(id);
         roomRepository.save(room);
     }
 
@@ -79,5 +86,10 @@ public class QService {
     public boolean unAuthenticate(String name) {
         authenticated = false;
         return isAuthenticated(name);
+    }
+
+    public long getIdByName(String name){
+        String query = "select id from user where name='"+name+"'order by id desc limit 1";
+        return ((BigInteger)entityManager.createNativeQuery(query).getSingleResult()).longValue();
     }
 }

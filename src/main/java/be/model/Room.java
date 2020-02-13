@@ -31,6 +31,13 @@ public class Room {
         setVak(vak);
     }
 
+    public Room(ArrayList<Long> queue,String lector, String vak, String lokaal) {
+        setQueue(queue);
+        setLector(lector);
+        setLokaal(lokaal);
+        setVak(vak);
+    }
+
     @JsonIgnore
     public List<Long> getQueue() {
         return queue;
