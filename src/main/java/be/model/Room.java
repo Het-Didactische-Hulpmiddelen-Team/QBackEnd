@@ -13,8 +13,8 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ElementCollection(targetClass=Long.class)
-    private List<Long> queue;
+    @ElementCollection(targetClass=String.class)
+    private List<String> queue;
 
     private String lector;
     private String vak;
@@ -31,7 +31,7 @@ public class Room {
         setVak(vak);
     }
 
-    public Room(ArrayList<Long> queue,String lector, String vak, String lokaal) {
+    public Room(ArrayList<String> queue,String lector, String vak, String lokaal) {
         setQueue(queue);
         setLector(lector);
         setLokaal(lokaal);
@@ -39,11 +39,11 @@ public class Room {
     }
 
     @JsonIgnore
-    public List<Long> getQueue() {
+    public List<String> getQueue() {
         return queue;
     }
 
-    public void setQueue(List<Long> queue) {
+    public void setQueue(List<String> queue) {
         this.queue = queue;
     }
 
@@ -71,12 +71,12 @@ public class Room {
         this.lokaal = lokaal;
     }
 
-    public void addToQueue(Long id){
-        queue.add(id);
+    public void addToQueue(String name){
+        queue.add(name);
     }
 
-    public void deleteFromQueue(Long id){
-        queue.remove(id);
+    public void deleteFromQueue(String name){
+        queue.remove(name);
     }
 
     public long getId() {

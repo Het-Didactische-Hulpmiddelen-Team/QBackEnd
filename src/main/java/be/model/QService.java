@@ -2,14 +2,12 @@ package be.model;
 
 
 import be.db.RoomRepository;
-import be.db.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,8 +15,6 @@ public class QService {
 
     @Autowired
     private RoomRepository roomRepository;
-    @Autowired
-    private UserRepository userRepository;
 
     @PersistenceContext
     EntityManager entityManager;
@@ -36,17 +32,14 @@ public class QService {
     public void joinRoom(String name, long roomid) {
         Room room = roomRepository.findById(roomid).get();
         if(!getQueue(roomid).contains(name)){
-            userRepository.save(new User(name));
-            room.addToQueue(getIdByName(name));
+            room.addToQueue(name);
             roomRepository.save(room);
         }
     }
 
     public void leaveRoom(String name, long roomid) {
         Room room = roomRepository.findById(roomid).get();
-        long id = getIdByName(name);
-        room.deleteFromQueue(id);
-        userRepository.deleteById(id);
+        room.deleteFromQueue(name);
         roomRepository.save(room);
     }
 
@@ -68,11 +61,7 @@ public class QService {
 
     public List<String> getQueue(long roomid){
         Room room = roomRepository.findById(roomid).get();
-        List<String> result = new ArrayList<>();
-        for (long id:room.getQueue()) {
-            result.add(userRepository.findById(id).get().getName());
-        }
-        return result;
+        return room.getQueue();
     }
 
     public boolean authenticate(String name, String password) {
