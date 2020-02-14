@@ -20,6 +20,11 @@ public class QCRUDController {
         return service.getRooms();
     }
 
+    @GetMapping("/room/get/{roomid}")
+    public Object getRoom(@PathVariable(value = "roomid") long roomid){
+        return service.getRoom(roomid);
+    }
+
     @GetMapping("/room/queue/{roomid}")
     public Object getQueue(@PathVariable(value = "roomid") long roomid){
         return service.getQueue(roomid);
