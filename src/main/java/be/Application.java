@@ -21,7 +21,7 @@ public class Application {
     @Bean
     CommandLineRunner runner(RoomRepository roomRepository, UserRepository userRepository) {
         return args -> {
-            String[] users = new String[]{"Arne","Arthur","Stijn","Ruben","Niels","Gleb","Simon","Sander","Sam","Michiel","Thomas","Ewald","Ben","Brent"};
+            String[] users = new String[]{"Arne","Arthur","Stijn","Ruben","Niels","Gleb","Simon","Sander","Sam","Michiel","Thomas","Ewald","Ben","Brent","Levi","Dieter","Spenge","Stef","Milan","Joppe"};
             String[] lectoren = new String[]{"Vogels","Geens","Swennen","Jongen","Steegmans","Van Hee"};
             String[] vakken = new String[]{"PVM","Systeembeheer","BS2","Web2","Web4","POD"};
             String[] lokalen = new String[]{"C001","C002","D140","D126","B009"};

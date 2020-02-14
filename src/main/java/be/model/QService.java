@@ -46,6 +46,7 @@ public class QService {
         Room room = roomRepository.findById(roomid).get();
         long id = getIdByName(name);
         room.deleteFromQueue(id);
+        userRepository.deleteById(id);
         roomRepository.save(room);
     }
 
