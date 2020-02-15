@@ -6,11 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 @SpringBootApplication
+@EnableJpaRepositories("be.db")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -34,7 +36,7 @@ public class Application {
     public ArrayList<String> createQueue(String[] users){
         Random random = new Random();
         ArrayList<String> queue = new ArrayList<>();
-        for (int i = 0; i < users.length; i++) {
+        for (int i = 0; i < 12; i++) {
             int temp = random.nextInt(users.length);
             if(!queue.contains(users[temp])){
                 queue.add(users[temp]);

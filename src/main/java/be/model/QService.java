@@ -5,9 +5,6 @@ import be.db.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -15,9 +12,6 @@ public class QService {
 
     @Autowired
     private RoomRepository roomRepository;
-
-    @PersistenceContext
-    EntityManager entityManager;
 
     private boolean authenticated = false;
 
@@ -60,8 +54,7 @@ public class QService {
     }
 
     public List<String> getQueue(long roomid){
-        Room room = roomRepository.findById(roomid).get();
-        return room.getQueue();
+        return roomRepository.findById(roomid).get().getQueue();
     }
 
     public boolean authenticate(String name, String password) {
@@ -76,10 +69,5 @@ public class QService {
     public boolean unAuthenticate(String name) {
         authenticated = false;
         return isAuthenticated(name);
-    }
-
-    public long getIdByName(String name){
-        String query = "select id from user where name='"+name+"'order by id desc limit 1";
-        return ((BigInteger)entityManager.createNativeQuery(query).getSingleResult()).longValue();
     }
 }

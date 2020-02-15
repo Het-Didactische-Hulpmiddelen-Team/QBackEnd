@@ -3,15 +3,16 @@ package be.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 
 @Entity
-public class Room {
+public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
 
     @ElementCollection(targetClass=String.class)
     private List<String> queue;
@@ -85,16 +86,5 @@ public class Room {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Room.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("queue=" + queue.size())
-                .add("lector='" + lector + "'")
-                .add("vak='" + vak + "'")
-                .add("lokaal='" + lokaal + "'")
-                .toString();
     }
 }

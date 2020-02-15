@@ -75,8 +75,4 @@ public class QCRUDController {
     public boolean unAuthenticate(String name){
         return service.unAuthenticate(name);
     }
-
-
-
-
 }
