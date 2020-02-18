@@ -70,4 +70,8 @@ public class QService {
         authenticated = false;
         return isAuthenticated(name);
     }
+
+    public int getPosition(String name,long roomid) {
+        return getRoom(roomid).getQueue().indexOf(name) + 1 ;
+    }
 }

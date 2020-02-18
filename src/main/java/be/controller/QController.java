@@ -25,7 +25,6 @@ public class QController extends AbstractWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("New Text Message Received");
         if(message.getPayload().equals("open")){
-            System.out.println("added " + session.getId());
             sessions.add(session);
         }
         if(message.getPayload().contains("-")){

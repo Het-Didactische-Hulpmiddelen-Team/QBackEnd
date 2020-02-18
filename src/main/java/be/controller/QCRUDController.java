@@ -42,6 +42,11 @@ public class QCRUDController {
         return service.getQueue(roomid);
     }
 
+    @GetMapping("room/position/{roomid}/{name}")
+    public Object getPosition(@PathVariable(value = "name") String name,@PathVariable(value = "roomid") long roomid){
+        return service.getPosition(name,roomid);
+    }
+
     @GetMapping("room/delete/{roomid}")
     public Object deleteRoom(@PathVariable(value = "roomid") long roomid){
         try {
@@ -75,4 +80,6 @@ public class QCRUDController {
     public boolean unAuthenticate(String name){
         return service.unAuthenticate(name);
     }
+
+
 }
