@@ -58,20 +58,16 @@ public class QService {
     }
 
     public boolean authenticate(String name, String password) {
-        authenticated = true;
-        return isAuthenticated(name);
+        authenticated = name.toUpperCase().equals("ROOT") && password.equals("qwerty");
+        return isAuthenticated();
     }
 
-    public boolean isAuthenticated(String name) {
+    public boolean isAuthenticated() {
         return authenticated;
     }
 
-    public boolean unAuthenticate(String name) {
+    public boolean unAuthenticate() {
         authenticated = false;
-        return isAuthenticated(name);
-    }
-
-    public int getPosition(String name,long roomid) {
-        return getRoom(roomid).getQueue().indexOf(name) + 1 ;
+        return isAuthenticated();
     }
 }

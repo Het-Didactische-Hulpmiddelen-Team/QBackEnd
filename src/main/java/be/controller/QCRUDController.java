@@ -2,6 +2,7 @@ package be.controller;
 
 import be.model.QService;
 import be.model.Room;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 public class QCRUDController {
     @Autowired
     QService service;
-
     public QCRUDController() {
 
     }
@@ -42,11 +42,6 @@ public class QCRUDController {
         return service.getQueue(roomid);
     }
 
-    @GetMapping("room/position/{roomid}/{name}")
-    public Object getPosition(@PathVariable(value = "name") String name,@PathVariable(value = "roomid") long roomid){
-        return service.getPosition(name,roomid);
-    }
-
     @GetMapping("room/delete/{roomid}")
     public Object deleteRoom(@PathVariable(value = "roomid") long roomid){
         try {
@@ -66,19 +61,20 @@ public class QCRUDController {
         }
     }
 
-    @GetMapping("authenticate")
-    public boolean authenticate(String name,String password){
-        return service.authenticate(name,password);
+    @PostMapping("authenticate")
+    public boolean authenticate(@RequestBody String json){
+        JSONObject temp = new JSONObject(json);
+        return service.authenticate(temp.getString("name"),temp.getString("password"));
     }
 
     @GetMapping("isAuthenticated")
-    public boolean isAuthenticated(String name){
-        return service.isAuthenticated(name);
+    public boolean isAuthenticated(){
+        return service.isAuthenticated();
     }
 
     @GetMapping("unAuthenticate")
-    public boolean unAuthenticate(String name){
-        return service.unAuthenticate(name);
+    public boolean unAuthenticate(){
+        return service.unAuthenticate();
     }
 
 

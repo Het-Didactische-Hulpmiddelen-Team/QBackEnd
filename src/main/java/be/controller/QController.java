@@ -39,7 +39,7 @@ public class QController extends AbstractWebSocketHandler {
                 service.leaveRoom(name, id);
             }
 
-            sendMessageToAll(new TextMessage(service.getQueue(id).toString() + "-" + id + "-" + service.getPosition(name,id)));
+            sendMessageToAll(new TextMessage(service.getQueue(id).toString() + "-" + id));
         }
     }
 
