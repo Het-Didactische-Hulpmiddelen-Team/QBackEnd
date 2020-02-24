@@ -80,6 +80,10 @@ public class Room implements Serializable {
         queue.remove(name);
     }
 
+    public void deleteFromQueue(Long userid){
+        queue.remove(userid);
+    }
+
     public long getId() {
         return this.id;
     }

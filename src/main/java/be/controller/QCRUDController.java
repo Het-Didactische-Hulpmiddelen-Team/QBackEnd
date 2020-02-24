@@ -42,6 +42,18 @@ public class QCRUDController {
         return service.getQueue(roomid);
     }
 
+    @GetMapping("room/deleteat/{roomid}/{userid}")
+    public Object deleteAt(@PathVariable(value = "userid") long userid,@PathVariable(value = "roomid") long roomid) {
+        service.leaveRoom(userid,roomid);
+        return service.getQueue(roomid);
+    }
+
+    @GetMapping("room/clear/{roomid}")
+    public Object clearRoom(@PathVariable(value = "roomid") long roomid) {
+        service.clearRoom(roomid);
+        return service.getQueue(roomid);
+    }
+
     @GetMapping("room/delete/{roomid}")
     public Object deleteRoom(@PathVariable(value = "roomid") long roomid){
         try {

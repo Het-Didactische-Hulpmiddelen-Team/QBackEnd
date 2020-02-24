@@ -5,6 +5,7 @@ import be.db.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,6 +35,12 @@ public class QService {
     public void leaveRoom(String name, long roomid) {
         Room room = roomRepository.findById(roomid).get();
         room.deleteFromQueue(name);
+        roomRepository.save(room);
+    }
+
+    public void leaveRoom(Long userid, long roomid) {
+        Room room = roomRepository.findById(roomid).get();
+        room.deleteFromQueue(userid);
         roomRepository.save(room);
     }
 
@@ -69,5 +76,11 @@ public class QService {
     public boolean unAuthenticate() {
         authenticated = false;
         return isAuthenticated();
+    }
+
+    public void clearRoom(long roomid) {
+        Room room = roomRepository.findById(roomid).get();
+        room.setQueue(new ArrayList<>());
+        roomRepository.save(room);
     }
 }
