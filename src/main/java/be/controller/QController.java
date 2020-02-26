@@ -23,7 +23,6 @@ public class QController extends AbstractWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
-        System.out.println("New Text Message Received");
         if(message.getPayload().equals("open")){
             sessions.add(session);
         }
@@ -45,12 +44,10 @@ public class QController extends AbstractWebSocketHandler {
 
     @Override
     protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws IOException {
-        System.out.println("New Binary Message Received");
         session.sendMessage(message);
     }
 
     private void sendMessageToAll(TextMessage message) {
-        System.out.println(message);
         for (WebSocketSession session : sessions) {
             try {
                 if(session.isOpen()){
