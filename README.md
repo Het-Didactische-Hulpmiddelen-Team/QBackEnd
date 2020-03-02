@@ -9,6 +9,8 @@ Here you can also define which database you want to use.
 ### Usage
 This is a gradle project.
 - You first need to compile this project using gradle.
+- In your build folder you can find a jar file.
+- After executing this you can access the project from your server.
 
 ## Endpoints
 
