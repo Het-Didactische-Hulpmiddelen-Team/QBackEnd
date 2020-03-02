@@ -4,6 +4,7 @@ QueueBackEnd
 ### Before
 
 Default port this webapplication runs on is port 8080, to change it you will need to edit `application.properties`.
+Here you can also define which database you want to use.
 
 ### Usage
 This is a gradle project.
